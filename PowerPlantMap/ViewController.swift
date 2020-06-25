@@ -8,8 +8,6 @@ class ViewController: UIViewController {
     lazy var map: MKMapView = {
         let m = MKMapView()
         m.delegate = self
-        
-        
         return m
     }()
     
@@ -56,10 +54,6 @@ class ViewController: UIViewController {
         getData()
         setRegion()
         addAnnotations(plants: power)
-//        print(power[0].coordinate?.longitude ?? 0)
-//        print(power[0].coordinate?.latitude ?? 0 )
-        //        power[0].type
-        //        power[0].plant_name
     }
 }
 

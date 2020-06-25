@@ -67,6 +67,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		855C745424A502B000FEAB7F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDE1119323EE12F9004BD777 /* PowerPlantData.json */,
+				CDE1116C23EE10FB004BD777 /* AppDelegate.swift */,
+				CDE1116E23EE10FB004BD777 /* SceneDelegate.swift */,
+				CDE1117223EE10FB004BD777 /* Main.storyboard */,
+				CDE1117523EE10FF004BD777 /* Assets.xcassets */,
+				CDE1117723EE10FF004BD777 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CDE1116023EE10FB004BD777 = {
 			isa = PBXGroup;
 			children = (
@@ -88,14 +101,9 @@
 		CDE1116B23EE10FB004BD777 /* PowerPlantMap */ = {
 			isa = PBXGroup;
 			children = (
-				CDE1119323EE12F9004BD777 /* PowerPlantData.json */,
-				CDE1116C23EE10FB004BD777 /* AppDelegate.swift */,
-				CDE1116E23EE10FB004BD777 /* SceneDelegate.swift */,
 				CDE1117023EE10FB004BD777 /* ViewController.swift */,
-				CDE1117223EE10FB004BD777 /* Main.storyboard */,
-				CDE1117523EE10FF004BD777 /* Assets.xcassets */,
-				CDE1117723EE10FF004BD777 /* LaunchScreen.storyboard */,
 				CDE1117A23EE10FF004BD777 /* Info.plist */,
+				855C745424A502B000FEAB7F /* Supporting Files */,
 				CDE1119923EE13C4004BD777 /* Power Plant Structs */,
 			);
 			path = PowerPlantMap;
