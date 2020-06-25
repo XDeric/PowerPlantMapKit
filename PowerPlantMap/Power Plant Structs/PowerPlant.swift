@@ -22,8 +22,8 @@ struct PowerPlant: Codable {
             let json = try JSONDecoder().decode(APIResponse.self, from: jsonData)
             return json.records.map { (wrapper) in
                 var powerPlant = wrapper.fields
-                powerPlant.coordinate = Coordinate(latitude: wrapper.geometry.coordinates[0],
-                                                   longitude: wrapper.geometry.coordinates[1])
+                powerPlant.coordinate = Coordinate(latitude: wrapper.geometry.coordinates[1],
+                                                   longitude: wrapper.geometry.coordinates[0])
                 
                 return powerPlant
             }

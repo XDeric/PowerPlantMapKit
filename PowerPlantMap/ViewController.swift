@@ -18,13 +18,18 @@ class ViewController: UIViewController {
         power = PowerPlant.makePowerPlants(from: data)
     }
     
+    func setRegion(){
+        let initialLocation = CLLocationCoordinate2D(latitude: -32.395, longitude: 150.9492)
+        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        map.setRegion(region, animated: true)
+    }
+    
     func addAnnotations(plants: [PowerPlant]){
         let pins = MKPointAnnotation()
         for location in plants {
             pins.title = location.plant_name
-            //if let long = location {}
+            pins.subtitle = location.type.rawValue
             pins.coordinate = CLLocationCoordinate2D(latitude: location.coordinate?.latitude ?? 0, longitude: location.coordinate?.longitude ?? 0)
-            
             map.addAnnotation(pins)
         }
     }
@@ -43,20 +48,14 @@ class ViewController: UIViewController {
         
     }
     
-    func setRegion(){
-        let initialLocation = CLLocationCoordinate2D(latitude: 150.9492, longitude: -32.395)
-        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        map.setRegion(region, animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         getData()
-        //setRegion()
+        setRegion()
         addAnnotations(plants: power)
-        print(power[0].coordinate?.longitude ?? 0)
-        print(power[0].coordinate?.latitude ?? 0 )
+//        print(power[0].coordinate?.longitude ?? 0)
+//        print(power[0].coordinate?.latitude ?? 0 )
         //        power[0].type
         //        power[0].plant_name
     }
@@ -71,7 +70,4 @@ extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return MKAnnotationView()
     }
-    
-    
-    
 }
