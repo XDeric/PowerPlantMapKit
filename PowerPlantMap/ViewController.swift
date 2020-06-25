@@ -25,13 +25,15 @@ class ViewController: UIViewController {
     }
     
     func addAnnotations(plants: [PowerPlant]){
-        let pins = MKPointAnnotation()
+        
         for location in plants {
+            let pins = MKPointAnnotation()
             pins.title = location.plant_name
             pins.subtitle = location.type.rawValue
             pins.coordinate = CLLocationCoordinate2D(latitude: location.coordinate?.latitude ?? 0, longitude: location.coordinate?.longitude ?? 0)
             map.addAnnotation(pins)
         }
+        print(map.annotations)
     }
     
     
@@ -64,10 +66,23 @@ class ViewController: UIViewController {
 extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("test")
+        //print("test")
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        return MKAnnotationView()
+        
+        let identifier = "annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        print(annotation)
+        
+        return annotationView
     }
 }
