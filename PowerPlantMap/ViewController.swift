@@ -11,19 +11,20 @@ class ViewController: UIViewController {
         return m
     }()
     
+    ///gets data from json file converting it into a readable data
     func getData(){
         let data = PowerPlantFetchingService.getTestPowerPlantJSONData()
         power = PowerPlant.makePowerPlants(from: data)
     }
-    
+    ///starts the map location at the first pin/annotation
     func setRegion(){
         let initialLocation = CLLocationCoordinate2D(latitude: -32.395, longitude: 150.9492)
         let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
         map.setRegion(region, animated: true)
     }
     
+    ///adds the pins to the map
     func addAnnotations(plants: [PowerPlant]){
-        
         for location in plants {
             let pins = MKPointAnnotation()
             pins.title = location.plant_name
@@ -31,10 +32,10 @@ class ViewController: UIViewController {
             pins.coordinate = CLLocationCoordinate2D(latitude: location.coordinate?.latitude ?? 0, longitude: location.coordinate?.longitude ?? 0)
             map.addAnnotation(pins)
         }
-        print(map.annotations)
     }
     
     
+    ///sets up mapview with constraints
     func setUp(){
         map.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(map)
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
         
     }
     
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
@@ -59,10 +61,7 @@ class ViewController: UIViewController {
 
 extension ViewController: MKMapViewDelegate {
     
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        //print("test")
-    }
-    
+    ///loads the annotations onto the map like cells for tableview
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let identifier = "annotation"
@@ -71,6 +70,7 @@ extension ViewController: MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView!.canShowCallout = true
+            
         } else {
             annotationView!.annotation = annotation
         }
