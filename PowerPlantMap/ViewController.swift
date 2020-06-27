@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     ///starts the map location at the first pin/annotation
     func setRegion(){
         let initialLocation = CLLocationCoordinate2D(latitude: -32.395, longitude: 150.9492)
-        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: initialLocation, latitudinalMeters: 10000, longitudinalMeters: 10000)
         map.setRegion(region, animated: true)
     }
     
@@ -69,14 +69,23 @@ extension ViewController: MKMapViewDelegate {
 
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            //annotationView?.image = UIImage(named: "keyblade") this changes the image of the pin
             annotationView!.canShowCallout = true
+            let image = UIImage(named: "keyblade")
+            let imageView = UIImageView(image: image)
+            //can't seem to use frame CGRect to adjust size does not conform to uiview
             
+            
+//            let btn = UIButton(type: .detailDisclosure)
+            annotationView?.detailCalloutAccessoryView = imageView //or UIImageView(image: image)
         } else {
             annotationView!.annotation = annotation
         }
-        
-        print(annotation)
-        
         return annotationView
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print(view.annotation?.coordinate)
     }
 }
